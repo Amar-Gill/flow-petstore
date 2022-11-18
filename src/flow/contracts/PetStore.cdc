@@ -9,7 +9,7 @@ pub contract PetStore {
         pub let id: UInt64
 
         // String mapping to hold metadata
-        pub var metadata: {String: String}
+        pub(set) var metadata: {String: String}
 
         // Constructor method
         init(id: UInt64, metadata: {String: String}) {
@@ -18,6 +18,7 @@ pub contract PetStore {
         }
     }
 
+    // @TODO might not want to expose withdraw / updateTokenMetadata functions
     pub resource interface NFTReceiver {
 
         // Withdraw a token by its ID and returns the token.
@@ -75,9 +76,13 @@ pub contract PetStore {
 
         // Updates the metadata of an NFT based on the ID.
         pub fun updateTokenMetadata(id: UInt64, metadata: {String: String}) {
+            let nftRef <- self.ownedNFTs.remove(key: id)
+
             for key in metadata.keys {
-                self.ownedNFTs[id]?.metadata?.insert(key: key,  metadata[key]!)
+                nftRef?.metadata?.insert(key: key,  metadata[key]!)
             }
+
+            self.ownedNFTs[id] <-! nftRef
         }
     }
 
@@ -141,3 +146,4 @@ pub contract PetStore {
         self.account.save(<-create NFTMinter(), to: /storage/NFTMinter)
     }
 }
+ 
