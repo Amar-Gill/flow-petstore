@@ -16,3 +16,8 @@ Based on [this tutorial](https://nftschool.dev/tutorial/flow-nft-marketplace/#bu
   - take note of the address
 - save the account address / private key in the `accounts` property of `flow.json` as `test-account`
 - initialize an NFT collection for the new account with `flow transactions send src/flow/transaction/InitCollection.cdc --signer test-account`
+- send the NFT to the test-account collection from the emulator-account collection
+  - `flow transactions send src/flow/transaction/TransferToken.cdc 1 <test-account-address>`
+  - the NFT id is 1 because we only the `MintToken.cdc` transaction once
+  - WIP: this txn is erroring. May need to implement updateOwners method on NFTReceiver interface
+  - error: cannot mutate `owners`: field is only mutable inside `PetStore`
