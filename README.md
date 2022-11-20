@@ -16,6 +16,7 @@ Based on [this tutorial](https://nftschool.dev/tutorial/flow-nft-marketplace/#bu
 - create a new account `flow accounts create —-key <PUBLIC_KEY> --signer emulator-account`
   - take note of the address
 - save the account address / private key in the `accounts` property of `flow.json` as `test-account`
+  - `flow config add account`
 - initialize an NFT collection for the new account with `flow transactions send src/flow/transaction/InitCollection.cdc --signer test-account`
 - send the NFT to the test-account collection from the emulator-account collection
   - `flow transactions send src/flow/transaction/TransferToken.cdc 1 <test-account-address>`
