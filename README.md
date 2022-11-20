@@ -11,7 +11,8 @@ Based on [this tutorial](https://nftschool.dev/tutorial/flow-nft-marketplace/#bu
 - start emulator `flow emulator`
 - deploy contract `flow project deploy`
 - mint NFT to emulator-account storage `flow transactions send src/flow/transactions/MintToken.cdc <json-metadata>`
-- generate public-private key pair for a new account with `flow keys generate` and save both keys into `.keys.txt` for later reference
+- generate public-private key pair for a new account and save it for later reference:
+  - `flow keys generate -o json > .keys.json`
 - create a new account `flow accounts create —-key <PUBLIC_KEY> --signer emulator-account`
   - take note of the address
 - save the account address / private key in the `accounts` property of `flow.json` as `test-account`
